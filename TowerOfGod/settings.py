@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'FUG',
     'Zahard',
     'Position',
+    'tagging.apps.TaggingConfig',
 
 ]
 

@@ -21,6 +21,7 @@ class FUG_Admin(admin.ModelAdmin):
     ordering = ('created_date',)
 
     list_per_page = 20
+    list_filter = ('created_date',)
 
 class Information_Admin(admin.ModelAdmin):
     fieldsets = (
