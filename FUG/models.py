@@ -5,10 +5,10 @@ from django.utils import timezone
 class Character(models.Model):
     class Meta:
         verbose_name = 'Character'
-    # obj = Character.objects.get(pk=this_object_id)
-    # id = models.AutoField(primary_key=True)
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    title = models.CharField(max_length=20)
+
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE,
+                                verbose_name='작성자')
+    title = models.CharField(max_length=20, verbose_name='이름')
     text = models.TextField(default='?', verbose_name='이명')
 
     created_date = models.DateTimeField(default=timezone.now)
@@ -18,15 +18,12 @@ class Character(models.Model):
     post_position = models.CharField(
         max_length=30, null=True, default='?', verbose_name='직위')
 
-    # @property
-    # def category_id(self):
-    #     return self.id
-
     def publish(self):
         self.published_date = timezone.now()
         self.save()
     def __str__(self):
         return self.title
+        
 class Information(models.Model):
     class Meta:
         verbose_name_plural = 'Information'

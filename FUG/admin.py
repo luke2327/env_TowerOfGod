@@ -14,7 +14,7 @@ class FUG_Admin(admin.ModelAdmin):
         })
     )
     list_display = (
-        'title', 'id', 'post_position', 'text', 'author', 'created_date'
+        'title', 'id', 'post_position', 'text', 'created_date', 'author',
     )
     list_filter = ('author',)
     search_fields = ('title',)
