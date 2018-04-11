@@ -42,6 +42,7 @@ class Information_conceal(models.Model):
     class Meta:
         verbose_name_plural = 'Conceal Information'
         verbose_name = 'Conceal Information'
+        ordering = ['created_date']
 
     ## essential information
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE,
@@ -61,21 +62,32 @@ class Information_conceal(models.Model):
 class Noble_Family_Character(models.Model):
     class Meta:
         verbose_name = 'Character'
+        ordering = ['created_date']
 
     ## essential information
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE,
                                 verbose_name='작성자')
-    title = models.CharField(max_length=20)
-    character_information = models.TextField(default='?')
+    title = models.CharField(max_length=20, verbose_name='이름')
+    family_name = models.IntegerField(choices=NOBLE_FAMILY_CHOICES, default=1,
+                                        verbose_name='가문')
+    character_information = models.TextField(default='?', verbose_name='개요')
+
+    ## detail information
+    detail_information = models.TextField(default='', null=True,
+                                            blank=True, verbose_name='상세 내용')
+    skill = models.TextField(default='', null=True, blank=True, verbose_name='기술')
+    the_other = models.TextField(default='', null=True, blank=True, verbose_name='기타')
 
     ## position
-    position = models.IntegerField(choices=POSITION_CHOICES, default=1)
+    position = models.IntegerField(choices=POSITION_CHOICES, default=1,
+                                    verbose_name='포지션')
     advanced_position = models.IntegerField(
-        choices=ADVANCED_POSITION_CHOICES, default=1)
+        choices=ADVANCED_POSITION_CHOICES, default=0,
+        verbose_name='특수 포지션')
 
     ## date settings
-    created_date = models.DateTimeField(auto_now_add=True)
-    published_date = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(default=timezone.now())
+    published_date = models.DateTimeField(default=timezone.now())
 
     tag = TagField()
 

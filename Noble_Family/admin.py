@@ -50,17 +50,28 @@ class Noble_Family_Information_conceal_Admin(admin.ModelAdmin):
 class Noble_Family_Character_Admin(admin.ModelAdmin):
     fieldsets = (
         ('Information', {
-            'fields': ('title', 'character_information', 'author')
+            'fields': ('title', 'character_information',
+                        'family_name', 'author')
         }),
 
         ('Detail information', {
-            'fields': ('position', 'advanced_position', 'tag')
+            'fields': ('position', 'advanced_position',
+                        'detail_information', 'skill')
+        }),
+
+        ('Supplement', {
+            'fields': ('the_other', 'tag')
         }),
 
         ('Date setting', {
             'fields': ('created_date', 'published_date')
         }),
     )
+
+    list_display = ('title', 'family_name',
+                     'position', 'tag', 'created_date')
+    list_filter = ('created_date',)
+    search_fields = ('title',)
 
 admin.site.register(Information, Noble_Family_Admin)
 admin.site.register(
