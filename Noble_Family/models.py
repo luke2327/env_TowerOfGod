@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from tagging.fields import TagField
 from choices import *
+import datetime
 # Create your models here.
 
 class Information(models.Model):
@@ -30,8 +31,8 @@ class Information(models.Model):
         default=None, null=True, blank=True)
 
     ## date settings
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     tag = TagField()
 
@@ -51,8 +52,8 @@ class Information_conceal(models.Model):
     contents_text = models.TextField(null=False, blank=False, default=None)
 
     ## date settings
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     tag = TagField()
 
@@ -86,8 +87,8 @@ class Noble_Family_Character(models.Model):
         verbose_name='특수 포지션')
 
     ## date settings
-    created_date = models.DateTimeField(default=timezone.now())
-    published_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     tag = TagField()
 

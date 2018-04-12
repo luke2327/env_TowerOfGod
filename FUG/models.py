@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import datetime
 # Create your models here.
 
 class Character(models.Model):
@@ -11,8 +12,8 @@ class Character(models.Model):
     title = models.CharField(max_length=20, verbose_name='이름')
     text = models.TextField(default='?', verbose_name='이명')
 
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     generation = models.IntegerField(default=1, blank=True)
     post_position = models.CharField(
@@ -23,11 +24,11 @@ class Character(models.Model):
         self.save()
     def __str__(self):
         return self.title
-        
+
 class Information(models.Model):
     class Meta:
         verbose_name_plural = 'Information'
     title = models.CharField(max_length=20)
     information = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())

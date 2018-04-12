@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import nSelected_Character_Information, nSelected_Character_List
+from .models import nSelected_Character_Information, \
+                    nSelected_Character_List, \
+                    nSelected_Character_Detail_Information
 from choices import POSITION_CHOICES
 
 # Register your models here.
 
+@admin.register(nSelected_Character_Information)
 class nSelected_Character_Information_Admin(admin.ModelAdmin):
     fieldsets = (
         ('Information', {
@@ -11,14 +14,12 @@ class nSelected_Character_Information_Admin(admin.ModelAdmin):
                         'nSelected_Character_information_text',
                         'nSelected_Character_author',)
         }),
-
         ('Detail Information', {
             'fields': ('nSelected_Character_detail_information',
-                        'nSelected_Character_skill',
-                        'nSelected_Character_position',
-                        'nSelected_Character_source_url', 'tag')
+                       'nSelected_Character_skill',
+                       'nSelected_Character_position',
+                       'nSelected_Character_source_url', 'tag')
         }),
-
         ('Date setting', {
             'fields': ('created_date', 'published_date',)
         }),
@@ -27,18 +28,18 @@ class nSelected_Character_Information_Admin(admin.ModelAdmin):
     search_fields = ('nSelected_Character_name',)
     list_filter = ('created_date',)
     list_display = ('nSelected_Character_name', 'id',
-                     'nSelected_Character_position',
-                     'created_date', 'nSelected_Character_author', 'tag')
+                    'nSelected_Character_position',
+                    'created_date', 'nSelected_Character_author', 'tag')
     list_per_page = 20
 
+@admin.register(nSelected_Character_List)
 class nSelected_Character_List_Admin(admin.ModelAdmin):
     fieldsets = (
         ('Information', {
             'fields': ('nSelected_Character_name',
-                        'nSelected_Character_Class',
-                        'nSelected_Character_Rank',)
+                       'nSelected_Character_Class',
+                       'nSelected_Character_Rank',)
         }),
-
         ('Date setting', {
             'fields': ('created_date', 'published_date',)
         }),
@@ -50,7 +51,19 @@ class nSelected_Character_List_Admin(admin.ModelAdmin):
                     'nSelected_Character_Rank',
                     'nSelected_Character_Class')
 
-admin.site.register(nSelected_Character_Information,
-                    nSelected_Character_Information_Admin)
-admin.site.register(nSelected_Character_List,
-                    nSelected_Character_List_Admin)
+@admin.register(nSelected_Character_Detail_Information)
+class nSelected_Character_Detail_Information_Admin(admin.ModelAdmin):
+    fieldsets = (
+        ('Information', {
+            'fields': ('nSelected_Character_Detail_Information_title',
+                       'nSelected_Character_Detail_Information_text', 'tag')
+        }),
+        ('Date setting', {
+            'fields': ('created_date', 'published_date',)
+        }),
+    )
+
+    search_fields = ('nSelected_Character_Detail_Information_title',)
+    list_filter = ('created_date',)
+    list_display = ('nSelected_Character_Detail_Information_title',
+                    'tag', 'created_date')

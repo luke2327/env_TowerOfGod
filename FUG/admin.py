@@ -3,6 +3,8 @@ from .models import Character, Information
 from django.db.models import Q
 
 # Register your models here.
+
+@admin.register(Character)
 class FUG_Admin(admin.ModelAdmin):
     fieldsets = (
         ('Information', {
@@ -10,7 +12,8 @@ class FUG_Admin(admin.ModelAdmin):
         }),
 
         ('Advanced options', {
-            'fields': ('created_date', 'published_date', 'generation', 'post_position'),
+            'fields': ('created_date', 'published_date',
+                       'generation', 'post_position'),
         })
     )
     list_display = (
@@ -23,6 +26,7 @@ class FUG_Admin(admin.ModelAdmin):
     list_per_page = 20
     list_filter = ('created_date',)
 
+@admin.register(Information)
 class Information_Admin(admin.ModelAdmin):
     fieldsets = (
         ('Outline', {
@@ -32,5 +36,3 @@ class Information_Admin(admin.ModelAdmin):
     list_display = (
         'title',
     )
-admin.site.register(Character, FUG_Admin)
-admin.site.register(Information, Information_Admin)

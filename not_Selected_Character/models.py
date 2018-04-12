@@ -4,11 +4,12 @@ from tagging.fields import TagField
 from django.core.validators import URLValidator
 from choices import *
 from django import forms
+import datetime
 
 # Create your models here.
 class nSelected_Character_Information(models.Model):
     class Meta:
-        verbose_name_plural = 'Characters'
+        verbose_name_plural = 'Characters Information'
         ordering = ['created_date']
 
     ## essential info
@@ -30,8 +31,8 @@ class nSelected_Character_Information(models.Model):
         choices=POSITION_CHOICES, default=1, verbose_name='포지션')
 
     ## date settings
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     tag = TagField()
     nSelected_Character_source_url = models.CharField(
@@ -44,19 +45,39 @@ class nSelected_Character_Information(models.Model):
 
 class nSelected_Character_List(models.Model):
     class Meta:
-        verbose_name_plural = 'Characters'
+        verbose_name_plural = 'Characters List'
         ordering = ['nSelected_Character_Rank']
 
     ## essential info
     nSelected_Character_name = models.CharField(
         max_length=20, verbose_name='이름')
     nSelected_Character_Class = models.IntegerField(
-        choices=RANK_OR_UNRANK_CHOICES, default=1)
-    nSelected_Character_Rank = models.IntegerField()
+        choices=RANK_OR_UNRANK_CHOICES, default=1, verbose_name='분류')
+    nSelected_Character_Rank = models.PositiveIntegerField(
+        verbose_name='랭킹', default=1, blank=True, null=True)
 
     ## date settings
-    created_date = models.DateTimeField(default=timezone.now())
-    published_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     def __str__(self):
         return self.nSelected_Character_name
+
+class nSelected_Character_Detail_Information(models.Model):
+    class Meta:
+        verbose_name_plural = 'Information'
+
+    ## essential info
+    nSelected_Character_Detail_Information_title = models.CharField(
+        max_length=30, verbose_name='제목')
+    nSelected_Character_Detail_Information_text = models.TextField(
+        default='', blank=True, null=True, verbose_name='내용')
+
+    ## date settings
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(default=datetime.datetime.now())
+
+    tag = TagField()
+
+    def __str__(self):
+        return self.nSelected_Character_Detail_Information_title

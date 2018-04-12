@@ -48,3 +48,17 @@ CLASS_OF_UNRANK_CHOICES = (
     (5, ("D급 선별인원")),
     (6, ("E급 선별인원")),
 )
+
+MEDIA_CHOICES = (
+    ('Audio', (
+            ('vinyl', 'Vinyl'),
+            ('cd', 'CD'),
+        )
+    ),
+    ('Video', (
+            ('vhs', 'VHS Tape'),
+            ('dvd', 'DVD'),
+        )
+    ),
+    ('unknown', 'Unknown'),
+)
