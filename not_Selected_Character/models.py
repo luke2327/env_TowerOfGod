@@ -9,7 +9,7 @@ from django import forms
 class nSelected_Character_Information(models.Model):
     class Meta:
         verbose_name_plural = 'Characters'
-        # ordering = ['created_date']
+        ordering = ['created_date']
 
     ## essential info
     nSelected_Character_author = models.ForeignKey(
@@ -38,6 +38,25 @@ class nSelected_Character_Information(models.Model):
         max_length=255, blank=True, null=True, default='',
         verbose_name='source url')
 
+
+    def __str__(self):
+        return self.nSelected_Character_name
+
+class nSelected_Character_List(models.Model):
+    class Meta:
+        verbose_name_plural = 'Characters'
+        ordering = ['nSelected_Character_Rank']
+
+    ## essential info
+    nSelected_Character_name = models.CharField(
+        max_length=20, verbose_name='이름')
+    nSelected_Character_Class = models.IntegerField(
+        choices=RANK_OR_UNRANK_CHOICES, default=1)
+    nSelected_Character_Rank = models.IntegerField()
+
+    ## date settings
+    created_date = models.DateTimeField(default=timezone.now())
+    published_date = models.DateTimeField(default=timezone.now())
 
     def __str__(self):
         return self.nSelected_Character_name

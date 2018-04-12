@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import nSelected_Character_Information
+from .models import nSelected_Character_Information, nSelected_Character_List
 from choices import POSITION_CHOICES
 
 # Register your models here.
@@ -31,5 +31,26 @@ class nSelected_Character_Information_Admin(admin.ModelAdmin):
                      'created_date', 'nSelected_Character_author', 'tag')
     list_per_page = 20
 
+class nSelected_Character_List_Admin(admin.ModelAdmin):
+    fieldsets = (
+        ('Information', {
+            'fields': ('nSelected_Character_name',
+                        'nSelected_Character_Class',
+                        'nSelected_Character_Rank',)
+        }),
+
+        ('Date setting', {
+            'fields': ('created_date', 'published_date',)
+        }),
+    )
+
+    search_fields = ('nSelected_Character_name',)
+    list_filter = ('created_date',)
+    list_display = ('nSelected_Character_name',
+                    'nSelected_Character_Rank',
+                    'nSelected_Character_Class')
+
 admin.site.register(nSelected_Character_Information,
                     nSelected_Character_Information_Admin)
+admin.site.register(nSelected_Character_List,
+                    nSelected_Character_List_Admin)
