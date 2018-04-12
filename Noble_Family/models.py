@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from tagging.fields import TagField
-from .choices import *
+from choices import *
 # Create your models here.
 
 class Information(models.Model):

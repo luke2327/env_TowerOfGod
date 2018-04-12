@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Information, Information_conceal, \
-    Noble_Family_Character
+from .models import Information, Information_conceal, Noble_Family_Character
 # Register your models here.
 
 class Noble_Family_Admin(admin.ModelAdmin):
@@ -10,7 +9,7 @@ class Noble_Family_Admin(admin.ModelAdmin):
                         'information_text', 'author')
         }),
 
-        ('Advanced options', {
+        ('Detail Information', {
             'fields': ('member_family', 'friendship_family',
                         'rival_family', 'sect_family',
                         'dominate_floor', 'origin_family_floor',
@@ -73,7 +72,8 @@ class Noble_Family_Character_Admin(admin.ModelAdmin):
     list_filter = ('created_date',)
     search_fields = ('title',)
 
-admin.site.register(Information, Noble_Family_Admin)
+admin.site.register(
+    Information, Noble_Family_Admin)
 admin.site.register(
     Information_conceal, Noble_Family_Information_conceal_Admin)
 admin.site.register(
