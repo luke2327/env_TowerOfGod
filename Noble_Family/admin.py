@@ -1,9 +1,10 @@
 from django.contrib import admin
 from .models import Information, Information_conceal, Noble_Family_Character
+from exportCsv import ExportCsvMixin
 # Register your models here.
 
 @admin.register(Information)
-class Noble_Family_Admin(admin.ModelAdmin):
+class Noble_Family_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Information', {
             'fields': ('title', 'the_head_of_a_family',
@@ -23,11 +24,12 @@ class Noble_Family_Admin(admin.ModelAdmin):
     list_filter = ('created_date',)
     list_display = ('title', 'id', 'the_head_of_a_family',
                      'created_date', 'author', 'tag')
+    actions = ['export_as_csv']
 
     list_per_page = 20
 
 @admin.register(Information_conceal)
-class Noble_Family_Information_conceal_Admin(admin.ModelAdmin):
+class Noble_Family_Information_conceal_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Basic Contents', {
             'fields': ('title', 'contents_text', 'author')
@@ -42,9 +44,10 @@ class Noble_Family_Information_conceal_Admin(admin.ModelAdmin):
 
     list_display = ('title', 'id', 'created_date', 'author', 'tag')
     list_filter = ('created_date',)
+    actions = ['export_as_csv']
 
 @admin.register(Noble_Family_Character)
-class Noble_Family_Character_Admin(admin.ModelAdmin):
+class Noble_Family_Character_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Information', {
             'fields': ('title', 'character_information',
@@ -66,3 +69,4 @@ class Noble_Family_Character_Admin(admin.ModelAdmin):
                     'position', 'tag', 'created_date')
     list_filter = ('created_date',)
     search_fields = ('title',)
+    actions = ['export_as_csv']

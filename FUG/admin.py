@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import Character, Information
 from django.db.models import Q
+from exportCsv import ExportCsvMixin
 
 # Register your models here.
 
 @admin.register(Character)
-class FUG_Admin(admin.ModelAdmin):
+class FUG_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Information', {
             'fields': ('title', 'text', 'author',)
@@ -22,12 +23,13 @@ class FUG_Admin(admin.ModelAdmin):
     list_filter = ('author',)
     search_fields = ('title',)
     ordering = ('created_date',)
+    actions = ['export_as_csv']
 
     list_per_page = 20
     list_filter = ('created_date',)
 
 @admin.register(Information)
-class Information_Admin(admin.ModelAdmin):
+class Information_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Outline', {
             'fields': ('title', 'information',)
@@ -36,3 +38,5 @@ class Information_Admin(admin.ModelAdmin):
     list_display = (
         'title',
     )
+
+    actions = ['export_as_csv']

@@ -3,11 +3,10 @@ from .models import nSelected_Character_Information, \
                     nSelected_Character_List, \
                     nSelected_Character_Detail_Information
 from choices import POSITION_CHOICES
-
-# Register your models here.
+from exportCsv import ExportCsvMixin
 
 @admin.register(nSelected_Character_Information)
-class nSelected_Character_Information_Admin(admin.ModelAdmin):
+class nSelected_Character_Information_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Information', {
             'fields': ('nSelected_Character_name',
@@ -30,10 +29,11 @@ class nSelected_Character_Information_Admin(admin.ModelAdmin):
     list_display = ('nSelected_Character_name', 'id',
                     'nSelected_Character_position',
                     'created_date', 'nSelected_Character_author', 'tag')
+    actions = ['export_as_csv']
     list_per_page = 20
 
 @admin.register(nSelected_Character_List)
-class nSelected_Character_List_Admin(admin.ModelAdmin):
+class nSelected_Character_List_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Information', {
             'fields': ('nSelected_Character_name',
@@ -50,9 +50,10 @@ class nSelected_Character_List_Admin(admin.ModelAdmin):
     list_display = ('nSelected_Character_name',
                     'nSelected_Character_Rank',
                     'nSelected_Character_Class')
+    actions = ['export_as_csv']
 
 @admin.register(nSelected_Character_Detail_Information)
-class nSelected_Character_Detail_Information_Admin(admin.ModelAdmin):
+class nSelected_Character_Detail_Information_Admin(admin.ModelAdmin, ExportCsvMixin):
     fieldsets = (
         ('Information', {
             'fields': ('nSelected_Character_Detail_Information_title',
@@ -67,3 +68,4 @@ class nSelected_Character_Detail_Information_Admin(admin.ModelAdmin):
     list_filter = ('created_date',)
     list_display = ('nSelected_Character_Detail_Information_title',
                     'tag', 'created_date')
+    actions = ['export_as_csv']
